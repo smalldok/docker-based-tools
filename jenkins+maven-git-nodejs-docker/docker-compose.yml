@@ -1,0 +1,12 @@
+version: '3'
+services:
+  myjenkins:
+    image: smalldok/jenkins:1.0
+    environment: 
+      - JAVA_OPTS="-Xmx8192m"
+      - ROOT_PASS="jenkins"
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /Users/smalldok/work/idea-work/docker/volume/jenkins_home:/var/jenkins_home
