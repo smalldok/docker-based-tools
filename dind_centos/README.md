@@ -26,13 +26,28 @@ $ ./build.sh
 
 ### Step 3: 运行
 ```sh
-$ docker run --name dind_centos --privileged -d dind_centos
+$ docker run --name docker-0 --privileged -d dind_centos
 ```
 
 ### Step 4: 进入容器后台
 ```sh
-$ docker exec -it -u root dind_centos /bin/bash
+$ docker exec -it -u root docker-0 /bin/bash
 $ docker info #查看docker版本等信息
 ```
 
 参考：https://www.cnblogs.com/cs-zh/p/7878193.html
+
+### 常见问题
+`执行上面docker run命令创建容器时,出现的问题`
+
+```sh
+Error response from daemon: cannot find cgroup mount destination: unknown.
+```
+解决方案(这是在windows系统上遇到的问题)
+
+```sh
+# 进入Oracle virtualbox中的defaul系统，执行以下命令
+sudo mkdir /sys/fs/cgroup/systemd
+sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+
+```
